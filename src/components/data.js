@@ -53,6 +53,7 @@ const sideNavItems = [
   {
     title: 'Dashboard',
     mainmenu: true,
+    firstItem : true,
     submenuItems: [
       { icon: <RiDashboardLine />, title: 'Default', path: '/' },
       { icon: <TbDeviceAnalytics />, title: 'Analytics', path: '/analytics' },
@@ -74,11 +75,13 @@ const sideNavItems = [
       {
         icon: <FiUserCheck />,
         submenu: true,
+        leaf:false,
         title: 'Users',
         submenuItems: [ 
           {
             title: 'AccountProfile',
             submenu: true,
+            leaf:false,
             submenuItems: [
               { title: ' Profile01', path: '/users/account/profile1', leaf: true },
               { title: ' Profile02', path: '/users/account/profile2', leaf: true },
@@ -91,6 +94,7 @@ const sideNavItems = [
         icon: <FiUserPlus/>,
         title: 'Customer',
         submenu: true,
+        leaf:false,
         submenuItems: [
           { title: ' Customer List', path: '/customer/customerlist', leaf: true },
           { title: ' Order List', path: '/customer/orderlist', leaf: true },
@@ -102,6 +106,7 @@ const sideNavItems = [
         icon: <TbBasketBolt />,
         title: 'E-commerce',
         submenu: true,
+        leaf:false,
         submenuItems: [
           { title: ' Products', path: '/ecommerce/products', leaf: true },
           { title: ' Products Detail', path: '/ecommerce/productdetail', leaf: true },
@@ -120,6 +125,7 @@ const sideNavItems = [
         icon: <TbScreenShare />,
         title: 'Components',
         submenu: true,
+        leaf:false,
         submenuItems: [
           { title: 'Autocomplete', path: '/components/autocomplete', leaf: true },
           { title: 'Button', path: '/components/button', leaf: true },
@@ -137,13 +143,14 @@ const sideNavItems = [
   {
     title: 'Others',
     mainmenu: true,
+    leaf:false,
     submenuItems: [
-          { icon: <TbClipboardTypography />, title: 'Typography', path: '/typography', leaf: true },
-          { icon: <TbColorPicker />, title: 'Color', path: '/color', leaf: true },
-          { icon: <TbShadow />, title: 'Shadow', path: '/shadow', leaf: true },
-          { icon: <TbMap2 />, title: 'Map', path: '/map', leaf: true },
-          { icon: <CiDatabase />, title: 'Data Grid', path: '/datagrid' , leaf: true},
-          { icon: <IoTabletLandscape />, title: 'Table', path: '/table' , leaf: true},
+          { icon: <TbClipboardTypography />, title: 'Typography', path: '/typography'},
+          { icon: <TbColorPicker />, title: 'Color', path: '/color' },
+          { icon: <TbShadow />, title: 'Shadow', path: '/shadow' },
+          { icon: <TbMap2 />, title: 'Map', path: '/map' },
+          { icon: <CiDatabase />, title: 'Data Grid', path: '/datagrid'},
+          { icon: <IoTabletLandscape />, title: 'Table', path: '/table' },
     ],
   },
 ]

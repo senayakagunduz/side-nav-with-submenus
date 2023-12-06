@@ -15,11 +15,11 @@ const icons = [
 
 const Header = ({ toggleSidebar }) => {
     return (
-        <header className=' flex justify-between items-center bg-white py-2 lg:py-1 px-7 lg:px-3 text-textGrey'>
+        <header className=' flex justify-between items-center bg-white py-2 lg:py-1 px-7 lg:px-3 '>
             <div className=' flex justify-between items-center space-x-8 lg:space-x-16'>
                 <div className='flex items-center'>
                     <div className=' hidden lg:block px-0 lg:pr-10'>
-                        <span className='hidden lg:block text-3xl font-bold py-4 '>
+                        <span className='hidden lg:block text-3xl font-bold py-4 text-purpleDark '>
                             Berry
                         </span>
                     </div>

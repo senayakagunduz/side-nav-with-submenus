@@ -57,74 +57,107 @@ const MenuItem = ({ item, collapsed, index }) => {
       },[pathname])
     
       return ( 
-      <>
+      <>    
+            {/*sidebar açıksa*/}
             {!collapsed ? 
             (<>
                 <div>
-                    <div onClick={toggleSubMenu}
-                    className={`flex py-2 items-center hover:bg-purple-100 `}>
+                    {/*tüm linklerin hoverı*/}
+                    {!item.mainmenu ? 
+                    (<div onClick={toggleSubMenu}
+                    className={`flex py-1 items-center rounded-lg  `}>
                         {/*submenuitems*/}
-                         <div  className='flex items-center justify-between'>
+                       
+                         <div  className='flex items-center justify-between '>
                             <Link
                             key={index}
                             href={item.path || "#"}
                             onClick={() => handleItemClick(index, item.path)}
                             className={`${
-                                pathname === item.path && index === selectedItem
-                                ? 'flex flex-row space-x-4 items-center bg-purpleLight transition-colors rounded text-purpleDark font-bold'
+                                ((pathname === item.path || item.path === undefined) && index === selectedItem && !item?.leaf)
+                                ? 'flex flex-row space-x-4 items-center bg-purpleLight text-purple-800 transition-colors rounded-lg  font-bold'
                                 : ''
-                            } text-sm flex justify-center items-center cursor-pointer py-2 px-4`}
+                            } ${
+                                ((pathname === item.path || item.path === undefined) && index === selectedItem && item?.leaf)
+                                ? 'flex flex-row space-x-4 items-center text-purple-800  font-bold'
+                                : ''
+                            } text-sm flex justify-center items-center cursor-pointer py-2 px-4 rounded-lg 
+                             `}
                             >
-                            <div className='flex items-center w-32'>
+                            {item.leaf ? 
+                            (
+                            <ul className='flex items-center justify-start ml-8 w-32 hover:bg-none'>
+                                <li className='list-disc'>{item.title}</li>
+                            </ul>
+                            ) 
+                            : 
+                            (
+                            <div className='flex justify-items-start items-center w-40 py-2 px-3 '>
                                 <span className='mr-3'>{item.icon}</span>
                                 <span className=''>{item.title}</span>
                             </div>
-                               
+                            )}
+                             {item.submenuItems && !item.submenuItems[0]?.icon &&
+                            (subMenuOpen ? 
+                                <div className='flex flex-row space-x-4'><MdKeyboardArrowUp /></div> 
+                                : 
+                                <div className='flex flex-row space-x-4'><MdKeyboardArrowDown /></div>
+                            )}
                             </Link>
-                        </div>      
-                       
-                    
-                        {item.submenuItems && !item.submenuItems[0]?.icon &&
-                         (subMenuOpen ? 
-                            <div className='flex flex-row space-x-5'><MdKeyboardArrowUp /></div> 
-                            : 
-                            <div className='flex flex-row space-x-5'><MdKeyboardArrowDown /></div>)}
-                        </div>
-                   
+                            </div>  
+                           
+                            {/* {item.submenuItems && !item.submenuItems[0]?.icon &&
+                            (subMenuOpen ? 
+                                <div className='flex flex-row space-x-4'><MdKeyboardArrowUp /></div> 
+                                : 
+                                <div className='flex flex-row space-x-4'><MdKeyboardArrowDown /></div>
+                            )} */}
+                            </div>
+                         )
+                         : 
+                         (
+                         <>
+                       {!item.firstItem ? <hr className="border-gray-200 my-2 px-2 w-full" /> : <></>}
+                        <span>{item.title}</span></> )}      
             
                 {subMenuOpen && item.submenuItems && (
-                    <div className='pl-5 list-disc'>
-                        
+                    <div className='pl-4'>
+                 {/*Başlık dışıdakileri bastırıyor*/}       
                     {item.submenuItems.map((child, index) => (
-                        <Link href={item.path || "#"} >
+                        <Link href={item.path || "#"}>
                             <MenuItem key={index} item={child} />
                         </Link>   
                     ))}
-                    <hr className="border-gray-100 my-2 px-2 w-full" />
+                    
                     </div>
                 )}
-
-                </div></>
-            ) 
-                
+                 
+                </div>
+            </>
+            )    
             : 
             (
+ 
                 <> 
-                    
-                    {
-                        item.submenuItems.filter((child) => child.path).map((child, index) => (
-                            <div key={index} className='px-2 py-3 hover:bg-purpleLight hover:rounded cursor-pointer text-gray-700'>
-                                <Link key={index} 
-                                href={child.path || "#" } 
-                                onClick={() => handleCollapsedIconClick(index, child.path)}>
-                                    <div className={`text-xl ${pathname===child.path 
-                                        && index ===selectedIcon ? 'text-textPurple bg-purpleLight' : ''}`}>
-                                        {child.icon}
-                                    </div>
-                                </Link>
-                            </div>
-                        ))
-                    }
+                     {
+        item.submenuItems.filter((child) => child.path).map((child, index) => (
+            <div key={index} className='flex item-center ml-2 py-2 pr-4 cursor-pointer text-gray-700' style={{
+                transition: 'background-color 0.3s',
+              }}>
+                <Link key={index} 
+                href={child.path || "#" } 
+                onClick={() => handleCollapsedIconClick(index, child.path)}
+                className='flex justify-center items-center '>
+                    <div className={` flex items-center justify-center rounded-lg p-3 text-xl hover:bg-purpleLight hover:rounded-lg
+                    ${pathname===child.path 
+                        && index ===selectedIcon ? 'text-textPurple bg-purpleLight w-8' : 'w-8'}`}>
+                        <span className=' flex justify-center items-center text-2xl '>{child.icon}</span>
+                    </div>
+                </Link>
+            </div>
+        ))
+    }
+                   
                 </>
             )}
         </>
@@ -133,6 +166,43 @@ const MenuItem = ({ item, collapsed, index }) => {
     };
     
     export default MenuItem;
+    // <span className='flex justify-center items-center text-2xl'>{child.icon}</span>
+    // {
+    //     item.submenuItems.filter((child) => child.path).map((child, index) => (
+    //         <div key={index} className='flex item-center ml-2 gap-3 py-2 px-3 rounded-md' style={{
+    //             transition: 'background-color 0.3s',
+    //           }}>
+    //             <Link key={index} 
+    //             href={child.path || "#" } 
+    //             onClick={() => handleCollapsedIconClick(index, child.path)}
+    //             className='flex justify-center items-center py-3 hover:bg-purple-200 rounded cursor-pointer '>
+    //                 <div className={` flex items-center justify-center rounded-lg text-xl 
+    //                 ${pathname===child.path 
+    //                     && index ===selectedIcon ? 'text-textPurple bg-purpleLight rounded' : ''}`}>
+    //                     <span className='flex justify-center items-center text-2xl text-textGrey '>{child.icon}</span>
+    //                 </div>
+    //             </Link>
+    //         </div>
+    //     ))
+    // }
+    // {
+    //     item.submenuItems.filter((child) => child.path).map((child, index) => (
+    //         <div key={index} className='flex item-center py-2 pr-4 hover:bg-purpleLight hover:rounded-lg cursor-pointer text-gray-700' style={{
+    //             transition: 'background-color 0.3s',
+    //           }}>
+    //             <Link key={index} 
+    //             href={child.path || "#" } 
+    //             onClick={() => handleCollapsedIconClick(index, child.path)}
+    //             className='flex justify-center items-center py-3'>
+    //                 <div className={` flex items-center justify-center rounded-lg text-xl 
+    //                 ${pathname===child.path 
+    //                     && index ===selectedIcon ? 'text-textPurple bg-purpleLight' : ''}`}>
+    //                     <span className='flex justify-center items-center text-xl'>{child.icon}</span>
+    //                 </div>
+    //             </Link>
+    //         </div>
+    //     ))
+    // }
 //     (<>
 //         <div>
 //             <div onClick={toggleSubMenu} className={`flex py-2 items-center hover:bg-purple-100 `}>
