@@ -6,8 +6,6 @@ import SideBar from "../../components/SideBar";
 
 export default function Layout(props) {
   const [collapsed, setCollapsed] = useState(false); //açık
-  const [expand, setExpand]=useState(true);
-  const [isActive, setIsActive] = useState(false);
 
   const toggleSidebar = () => {
     setCollapsed(!collapsed)
@@ -24,4 +22,4 @@ export default function Layout(props) {
     </div>
   )
 }
- {/* <SideBar  toggleSidebar={toggleSidebar} collapsed={collapsed} setCollapsed={setCollapsed} isActive={isActive}/> */}
+ 
