@@ -1,3 +1,5 @@
+
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -11,6 +13,13 @@ module.exports = {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      },
+      colors: {
+        'purpleLight': '#e1bee7',
+        'purpleDark': '#6a1b9a',
+        'textGrey':'rgb(75 85 99 / var(--tw-text-opacity))',
+        'lightGrey':'#9e9e9e',
+        'textPurple':'text-purple-600',
       },
     },
   },

@@ -52,7 +52,6 @@ const sideNavItems = [
   
   {
     title: 'Dashboard',
-    path: '/',
     mainmenu: true,
     submenuItems: [
       { icon: <RiDashboardLine />, title: 'Default', path: '/' },
@@ -93,22 +92,21 @@ const sideNavItems = [
         title: 'Customer',
         submenu: true,
         submenuItems: [
-          { title: ' Customer List', path: '/users/customer/customerlist', leaf: true },
-          { title: ' Order List', path: '/users/customer/orderlist', leaf: true },
-          { title: ' Create Invoice', path: '/users/customer/invoice', leaf: true },
-          { title: ' Product', path: '/users/customer/product', leaf: true },
+          { title: ' Customer List', path: '/customer/customerlist', leaf: true },
+          { title: ' Order List', path: '/customer/orderlist', leaf: true },
+          { title: ' Create Invoice', path: '/customer/invoice', leaf: true },
+          { title: ' Product', path: '/customer/product', leaf: true },
         ]
       },
       {
         icon: <TbBasketBolt />,
         title: 'E-commerce',
-        path:"/ecommerce",
         submenu: true,
         submenuItems: [
-          { title: ' Products', path: '/users/customer/products', leaf: true },
-          { title: ' Products Detail', path: '/users/customer/productdetail', leaf: true },
-          { title: ' Product List', path: '/users/customer/productlist', leaf: true },
-          { title: ' Checkout', path: '/users/customer/checkout', leaf: true },
+          { title: ' Products', path: '/ecommerce/products', leaf: true },
+          { title: ' Products Detail', path: '/ecommerce/productdetail', leaf: true },
+          { title: ' Product List', path: '/ecommerce/productlist', leaf: true },
+          { title: ' Checkout', path: '/ecommerce/checkout', leaf: true },
         ]
     
       },
@@ -121,7 +119,6 @@ const sideNavItems = [
       {
         icon: <TbScreenShare />,
         title: 'Components',
-        path: "/components",
         submenu: true,
         submenuItems: [
           { title: 'Autocomplete', path: '/components/autocomplete', leaf: true },

@@ -2,7 +2,7 @@ import React from 'react'
 
 const Page = () => {
   return (
-    <div>profile2</div>
+    <div>shadow</div>
   )
 }
 

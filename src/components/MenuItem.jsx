@@ -4,13 +4,14 @@ import { useRouter } from 'next/navigation';
 import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { FiChevronDown } from 'react-icons/fi';
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
 
 const MenuItem = ({ item, collapsed, index }) => {
     console.log(item, "item")
+
     const [selectedItem, setSelectedItem] = useState(null);
-    const [subMenuOpen, setSubMenuOpen] = useState(true);
+    const [selectedIcon, setSelectedIcon] = useState(null);
+    const [subMenuOpen, setSubMenuOpen] = useState(false);
 
     const pathname = usePathname();
     const router = useRouter();
@@ -26,13 +27,33 @@ const MenuItem = ({ item, collapsed, index }) => {
         }
     }
 
+    const handleCollapsedIconClick=(index,path)=>{
+        setSelectedIcon(index);
+
+        if(path){
+            router.push(path)
+        }
+    }
+
     const toggleSubMenu = () => {
         setSubMenuOpen(!subMenuOpen);
       };
 
       useEffect(() => {
-        setSubMenuOpen((item.submenuItems && item.submenuItems[0]?.icon))
-      }, [pathname]);
+
+          if (!item.icon && item.submenuItems && item.submenuItems.length > 0) {
+            setSubMenuOpen(true);
+          }
+
+          if (selectedItem === index && item.submenuItems) {
+                   setSubMenuOpen(true);
+          }
+              
+      }, []);
+
+      useEffect(()=>{
+
+      },[pathname])
     
       return ( 
       <>
@@ -40,11 +61,12 @@ const MenuItem = ({ item, collapsed, index }) => {
             (<>
                 <div>
                     <div
-                        onClick={() => handleItemClick(item?.path || '/')}
+                        
                         className={`flex ${
                         item.mainmenu ? 'text-red-800' : 'cursor-pointer link'
                         } items-center`}
                     >
+                            
                         <Link
                             href={item.path || "#"}
                             onClick={() => handleItemClick(index, item.path)}
@@ -54,12 +76,16 @@ const MenuItem = ({ item, collapsed, index }) => {
                                 : ''
                             } text-sm flex justify-center items-center cursor-pointer pl-0`}
                             >
-                                <span>{item.icon}</span>
+                            <div className='flex items-center' onClick={toggleSubMenu}>
+                                 <span>{item.icon}</span>
                                 <span>{item.title}</span>
+                            </div>
+                               
                             </Link>
                     
                         {item.submenuItems && !item.submenuItems[0]?.icon && (subMenuOpen ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />)}
-                    </div>
+                        </div>
+                   
             
                 {subMenuOpen && item.submenuItems && (
                     <div className='pl-5'>
@@ -73,25 +99,130 @@ const MenuItem = ({ item, collapsed, index }) => {
                     </div>
                 )}
 
-                </div></>) 
-                : (
+                </div></>
+            ) 
+                
+            : 
+            (
                 <> 
                     
-                   {item.submenuItems.map((child, index)=>{
-                    return (
-                        <Link href={item.path || "#"}>
-                        <div key={index} className='text-xl'>{child.icon}</div>
-                        </Link>
-                        
-                    )
-                   })}
-                </>)}
-      </>
+                    {
+                        item.submenuItems.filter((child) => child.path).map((child, index) => (
+                            <div key={index}>
+                            <Link href={child.path || "#" } onClick={() => handleCollapsedIconClick(index, child.path)}>
+                                <div className='text-xl'>{child.icon}</div>
+                            </Link>
+                            </div>
+                        ))
+                        }
+                </>
+            )}
+        </>
                 
       );
     };
     
     export default MenuItem;
+    // className={`${
+    //     pathname === item.path && index === selectedIcon
+    //     ? 'flex gap-2 items-center bg-purple-100 rounded-lg text-purple-800 font-bold transition duration-150 ease-in-out hover:bg-purple-300 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-400'
+    //     : ''
+    // } text-sm flex justify-center items-center cursor-pointer pl-0`}
+    // const MenuItem = ({ item, collapsed, index }) => {
+    //     console.log(item, "item")
+    
+    //     const [selectedItem, setSelectedItem] = useState(null);
+    //     const [subMenuOpen, setSubMenuOpen] = useState(true);
+    
+    //     const pathname = usePathname();
+    //     const router = useRouter();
+    
+    //     const handleItemClick=(index,path)=>{
+    //         setSelectedItem(index);
+    
+    //         if(item.submenuItems){
+    //             toggleSubMenu()
+    //         }
+    //         if(path){
+    //             router.push(path)
+    //         }
+    //     }
+    
+    //     const toggleSubMenu = () => {
+    //         setSubMenuOpen(!subMenuOpen);
+    //       };
+    
+    //       useEffect(() => {
+    //         // Sadece submenuItems varsa ve bir ikon varsa başlangıçta kapalı yap
+    //         // setSubMenuOpen((item.submenuItems && item.submenuItems[0]?.icon))
+    //         // [pathname,item.submenuItems]
+    //       }, [pathname]);
+        
+    //       return ( 
+    //       <>
+    //             {!collapsed ? 
+    //             (<>
+    //                 <div>
+    //                 {/* () => {
+    //                         handleItemClick(item?.path || '/'); */}
+    //                     <div
+    //                         onClick={toggleSubMenu}
+    //                         className={`flex ${
+    //                         item.mainmenu ? 'text-red-800' : 'cursor-pointer link'
+    //                         } items-center`}
+    //                     >
+                                
+    //                         <Link
+    //                             href={item.path || "#"}
+    //                             onClick={() => handleItemClick(index, item.path)}
+    //                             className={`${
+    //                                 pathname === item.path && index === selectedItem
+    //                                 ? 'flex gap-2 items-center bg-purple-100 rounded-lg text-purple-800 font-bold transition duration-150 ease-in-out hover:bg-purple-300 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-400'
+    //                                 : ''
+    //                             } text-sm flex justify-center items-center cursor-pointer pl-0`}
+    //                             >
+    //                             <div className='flex items-center'>
+    //                                  <span>{item.icon}</span>
+    //                                 <span>{item.title}</span>
+    //                             </div>
+                                   
+    //                             </Link>
+                        
+    //                         {item.submenuItems && !item.submenuItems[0]?.icon && (subMenuOpen ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />)}
+    //                         </div>
+                       
+                
+    //                 {subMenuOpen && item.submenuItems && (
+    //                     <div className='pl-5'>
+    //                     {item.submenuItems.map((child, index) => (
+    //                         <Link href={item.path || "#"}>
+    //                             <MenuItem key={index} item={child} />
+    //                         </Link>
+                            
+    //                     ))}
+    //                     <hr className="border-gray-100 my-2 px-2 w-full" />
+    //                     </div>
+    //                 )}
+    
+    //                 </div></>) 
+    //                 : (
+    //                 <> 
+                        
+    //                    {item.submenuItems.map((child, index)=>{
+    //                     return (
+    //                         <Link href={item.path || "#"}>
+    //                         <div key={index} className='text-xl'>{child.icon}</div>
+    //                         </Link>
+                            
+    //                     )
+    //                    })}
+    //                 </>)}
+    //       </>
+                    
+    //       );
+    //     };
+        
+    //     export default MenuItem;
 //<hr className="border-gray-500 my-2 px-2 w-full" />
 // onClick={()=>handleItemClick(index, item.path)} 
 // if (item.submenuItems) {

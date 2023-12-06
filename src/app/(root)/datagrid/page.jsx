@@ -2,7 +2,7 @@ import React from 'react'
 
 const Page = () => {
   return (
-    <div>profile3</div>
+    <div>data grid</div>
   )
 }
 
