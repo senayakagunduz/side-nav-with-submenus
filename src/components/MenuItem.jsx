@@ -81,33 +81,53 @@ const MenuItem = ({ item, collapsed, index }) => {
                                         href={item.path || "#"}
                                         onClick={() => handleItemClick(index, item.path)}
                                         className={`${((pathname === item.path || item.path === undefined) && index === selectedItem && !item?.leaf)
-                                            ? 'flex flex-row space-x-4 items-center bg-purpleLight text-purple-800 transition-colors rounded-lg  font-bold'
+                                            ? 'flex flex-row space-x-4 items-center bg-purpleLight text-purple-800 transition-colors rounded-lg font-bold'
                                             : 'bg-none'
                                             } ${((pathname === item.path || item.path === undefined) && index === selectedItem && item?.leaf)
                                                 ? 'flex flex-row space-x-4 items-center text-purple-800  font-bold'
                                                 : ''
-                                            } text-sm flex justify-center items-center cursor-pointer py-2 px-4 rounded-lg 
+                                            }  flex justify-center items-center cursor-pointer py-1 px-4  rounded-lg ${!item.leaf && 'hover:bg-purpleLight'} 
                              `}
                                     >
-                                        {item.leaf ?
+                                        {item.leaf || item.leafparent ?
+                                        
                                             (
-                                                <ul key={index} className='flex items-center justify-start ml-8 w-32 hover:bg-none'>
+                                               
+                                                <ul key={index} className='flex items-center justify-start py-3 px-3 ml-5 w-48' >
                                                     <li className='list-disc'>{item.title}</li>
+                                                
+                                                {item.submenuItems && !item.submenuItems[0]?.icon &&
+                                                    (subMenuOpen ?
+                                                       
+                                                        <div className='flex flex-row justify-between space-x-4'><MdKeyboardArrowUp /></div>
+                                                        :
+                                                        <div className='flex flex-row space-x-4'><MdKeyboardArrowDown /></div>
+                                                        
+                                                    )}
                                                 </ul>
+                                                    
                                             )
                                             :
                                             (
-                                                <ul className='flex justify-items-start items-center w-40 py-2 px-3 '>
-                                                    <li className='mr-3'>{item.icon}</li>
-                                                    <li className=''>{item.title}</li>
+                                              
+                                                <ul className='flex justify-between items-center w-48 py-3 px-3 rounded-lg'>
+                                                    <div className='flex items-center'>
+                                                        <li className='mr-3'>{item.icon}</li>
+                                                        <li className=''>{item.title}</li>
+                                                    </div>
+                                                    <div>
+                                                    {item.submenuItems && !item.submenuItems[0]?.icon &&
+                                                    (subMenuOpen ?
+                                                        <div className='flex flex-row space-x-4'><MdKeyboardArrowUp className='text-lg'/></div>
+                                                        :
+                                                        <div className='flex flex-row space-x-4'><MdKeyboardArrowDown className='text-lg'/></div>
+                                                    )}
+                                                    </div>
                                                 </ul>
+                                                
+                                                  
                                             )}
-                                        {item.submenuItems && !item.submenuItems[0]?.icon &&
-                                            (subMenuOpen ?
-                                                <div className='flex flex-row space-x-4'><MdKeyboardArrowUp /></div>
-                                                :
-                                                <div className='flex flex-row space-x-4'><MdKeyboardArrowDown /></div>
-                                            )}
+                                            
                                     </Link>
                                 </div>
                             </div>
@@ -116,7 +136,7 @@ const MenuItem = ({ item, collapsed, index }) => {
                             (
                                 <>
                                     {!item.firstItem ? <hr className="border-gray-200 my-2 px-2 w-full" /> : <></>}
-                                    <span>{item.title}</span></>)}
+                                    <span className='ml-6 text-sm font-bold'>{item.title}</span></>)}
 
                         {subMenuOpen && item.submenuItems && (
                             <div className='pl-4'>
@@ -139,7 +159,7 @@ const MenuItem = ({ item, collapsed, index }) => {
                     <>
                         {
                             item.submenuItems.filter((child) => child.path).map((child, index) => (
-                                <div key={index} className='flex item-center ml-2 py-2 pr-4 cursor-pointer text-gray-700' style={{
+                                <div key={index} className='flex item-center ml-1 py-2 pr-4 cursor-pointer text-gray-700' style={{
                                     transition: 'background-color 0.3s',
                                 }}>
                                     <Link key={index}

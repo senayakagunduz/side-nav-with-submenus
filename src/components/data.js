@@ -40,7 +40,8 @@ const sideNavItems = [
         submenuItems: [ 
           {
             title: 'AccountProfile',
-            submenu: true,
+            // submenu: true,
+            leafparent:true,
             leaf:false,
             submenuItems: [
               { title: ' Profile01', path: '/users/account/profile1', leaf: true },
