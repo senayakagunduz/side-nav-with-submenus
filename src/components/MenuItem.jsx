@@ -159,7 +159,7 @@ const MenuItem = ({ item, collapsed, index }) => {
                     <>
                         {
                             item.submenuItems.filter((child) => child.path).map((child, index) => (
-                                <div key={index} className='flex item-center  py-2 pr-4 cursor-pointer text-gray-700' style={{
+                                <div key={index} className='flex item-center mr-1 py-2 pr-4 cursor-pointer text-gray-700' style={{
                                     transition: 'background-color 0.3s',
                                 }}>
                                     <Link key={index}
