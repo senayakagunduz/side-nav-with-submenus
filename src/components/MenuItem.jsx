@@ -101,7 +101,7 @@ const MenuItem = ({ item, collapsed, index }) => {
                                                        
                                                         <div className='flex flex-row justify-between space-x-4'><MdKeyboardArrowUp /></div>
                                                         :
-                                                        <div className='flex flex-row space-x-4'><MdKeyboardArrowDown /></div>
+                                                        <div className='flex flex-row justify-between space-x-4'><MdKeyboardArrowDown /></div>
                                                         
                                                     )}
                                                 </ul>
