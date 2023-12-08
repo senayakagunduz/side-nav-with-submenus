@@ -10,7 +10,7 @@ const MenuItem = ({ item, collapsed, index }) => {
     const [selectedItem, setSelectedItem] = useState(null);
     const [selectedIcon, setSelectedIcon] = useState(null);
     const [subMenuOpen, setSubMenuOpen] = useState(false);
-
+    
     const pathname = usePathname();
     const router = useRouter();
 
@@ -22,9 +22,6 @@ const MenuItem = ({ item, collapsed, index }) => {
             setSelectedItem(index);
         }
 
-        if (item.submenuItems) {
-            toggleSubMenu()
-        }
         if (path) {
             router.push(path)
         }
@@ -44,20 +41,9 @@ const MenuItem = ({ item, collapsed, index }) => {
 
     const toggleSubMenu = () => {
         setSubMenuOpen(!subMenuOpen);
+        item.submenu=!item.submenu;
+       
     };
-
-    useEffect(() => {
-
-        if (!item.icon && item.submenuItems && item.submenuItems.length > 0) {
-            setSubMenuOpen(true);
-
-        }
-
-        if (selectedItem === index && item.submenuItems) {
-            setSubMenuOpen(true);
-        }
-
-    }, []);
 
     useEffect(() => {
 
@@ -73,7 +59,6 @@ const MenuItem = ({ item, collapsed, index }) => {
                         {!item.mainmenu ?
                             (<div onClick={toggleSubMenu} key={index}
                                 className={`flex py-1 items-center rounded-lg  `}>
-                                {/*submenuitems*/}
 
                                 <div className='flex items-center justify-between '>
                                     <Link
@@ -89,7 +74,7 @@ const MenuItem = ({ item, collapsed, index }) => {
                                             }  flex justify-center items-center cursor-pointer py-1 px-4  rounded-lg ${!item.leaf && 'hover:bg-purpleLight'} 
                              `}
                                     >
-                                        {item.leaf || item.leafparent ?
+                                        {item.leaf ?
                                         
                                             (
                                                
@@ -138,7 +123,7 @@ const MenuItem = ({ item, collapsed, index }) => {
                                     {!item.firstItem ? <hr className="border-gray-200 my-2 px-2 w-full" /> : <></>}
                                     <span className='ml-6 text-sm font-bold'>{item.title}</span></>)}
 
-                        {subMenuOpen && item.submenuItems && (
+                        {!item.submenu && item.submenuItems && (
                             <div className='pl-4'>
                                 {/*Başlık dışıdakileri bastırıyor*/}
                                 {item.submenuItems.map((child, index) => (

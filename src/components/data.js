@@ -15,17 +15,17 @@ const sideNavItems = [
     mainmenu: true,
     firstItem : true,
     submenuItems: [
-      { icon: <RiDashboardLine />, title: 'Default', path: '/' },
-      { icon: <TbDeviceAnalytics />, title: 'Analytics', path: '/analytics' },
+      { icon: <RiDashboardLine />, title: 'Default', path: '/',submenu: false },
+      { icon: <TbDeviceAnalytics />, title: 'Analytics', path: '/analytics',submenu: false },
     ],
   },
   {
     title: 'Widget',
     mainmenu: true,
     submenuItems: [
-      { icon: <MdOutlineWifiTethering />, title: 'Statistics', path: '/statistics' },
-      { icon: <BsClipboardData />, title: 'Data', path: '/data' },
-      { icon: <GiChart />, title: 'Chart', path: '/chart' },
+      { icon: <MdOutlineWifiTethering />, title: 'Statistics', path: '/statistics',submenu: false },
+      { icon: <BsClipboardData />, title: 'Data', path: '/data',submenu: false },
+      { icon: <GiChart />, title: 'Chart', path: '/chart',submenu: false },
     ],
   },
   {
@@ -40,13 +40,40 @@ const sideNavItems = [
         submenuItems: [ 
           {
             title: 'AccountProfile',
-            // submenu: true,
-            leafparent:true,
+            submenu: true,
+            // leafparent:true,
             leaf:false,
             submenuItems: [
-              { title: ' Profile01', path: '/users/account/profile1', leaf: true },
-              { title: ' Profile02', path: '/users/account/profile2', leaf: true },
-              { title: ' Profile03', path: '/users/account/profile3', leaf: true }
+              { title: ' Profile01', path: '/users/account/profile1', leaf: true,submenu: false },
+              { title: ' Profile02', path: '/users/account/profile2', leaf: true,submenu: false },
+              { title: ' Profile03', path: '/users/account/profile3', leaf: true,submenu: false },
+              { title: ' Profile04', path: '/users/account/profile1', leaf: true,submenu: false },
+              { title: ' Profile05', path: '/users/account/profile2', leaf: true,submenu: false },
+              { title: ' Profile06', path: '/users/account/profile3', leaf: true,submenu: false }
+            ]
+          },
+          {
+            title: 'Account',
+            submenu: true,
+            // leafparent:true,
+            leaf:false,
+            submenuItems: [
+              { title: ' Profile01', path: '/users/account/profile1', leaf: true ,submenu: false},
+              { title: ' Profile02', path: '/users/account/profile2', leaf: true, submenu: false},
+              { title: ' Profile03', path: '/users/account/profile3', leaf: true,submenu: false },
+              { title: ' Profile04', path: '/users/account/profile1', leaf: true,submenu: false },
+              { title: ' Profile05', path: '/users/account/profile2', leaf: true,submenu: false },
+              { 
+                title: ' Profile06', 
+                submenu: true,
+                // path: '/users/account/profile3', 
+                // leafparent:true,
+                leaf: false,
+                submenuItems: [
+                  { title: ' Profile01', path: '/users/account/profile1', leaf: true ,submenu: false},
+                  { title: ' Profile02', path: '/users/account/profile2', leaf: true,submenu: false },
+                ]
+               }
             ]
           },
         ]
@@ -57,10 +84,10 @@ const sideNavItems = [
         submenu: true,
         leaf:false,
         submenuItems: [
-          { title: ' Customer List', path: '/customer/customerlist', leaf: true },
-          { title: ' Order List', path: '/customer/orderlist', leaf: true },
-          { title: ' Create Invoice', path: '/customer/invoice', leaf: true },
-          { title: ' Product', path: '/customer/product', leaf: true },
+          { title: ' Customer List', path: '/customer/customerlist', leaf: true ,submenu: false},
+          { title: ' Order List', path: '/customer/orderlist', leaf: true,submenu: false },
+          { title: ' Create Invoice', path: '/customer/invoice', leaf: true,submenu: false },
+          { title: ' Product', path: '/customer/product', leaf: true ,submenu: false},
         ]
       },
       {
@@ -69,10 +96,10 @@ const sideNavItems = [
         submenu: true,
         leaf:false,
         submenuItems: [
-          { title: ' Products', path: '/ecommerce/products', leaf: true },
-          { title: ' Products Detail', path: '/ecommerce/productdetail', leaf: true },
-          { title: ' Product List', path: '/ecommerce/productlist', leaf: true },
-          { title: ' Checkout', path: '/ecommerce/checkout', leaf: true },
+          { title: ' Products', path: '/ecommerce/products', leaf: true,submenu: false },
+          { title: ' Products Detail', path: '/ecommerce/productdetail', leaf: true ,submenu: false},
+          { title: ' Product List', path: '/ecommerce/productlist', leaf: true ,submenu: false},
+          { title: ' Checkout', path: '/ecommerce/checkout', leaf: true,submenu: false },
         ]
     
       },
@@ -88,14 +115,14 @@ const sideNavItems = [
         submenu: true,
         leaf:false,
         submenuItems: [
-          { title: 'Autocomplete', path: '/components/autocomplete', leaf: true },
-          { title: 'Button', path: '/components/button', leaf: true },
-          { title: 'Checkbox', path: '/components/checkbox', leaf: true },
-          { title: 'Date & Time', path: '/components/datetime', leaf: true },
-          { title: 'Radio', path: '/components/radio', leaf: true },
-          { title: 'Slider', path: '/components/slider', leaf: true },
-          { title: 'Switch', path: '/components/switch', leaf: true },
-          { title: 'Text Field', path: '/components/text', leaf: true },
+          { title: 'Autocomplete', path: '/components/autocomplete', leaf: true,submenu: false },
+          { title: 'Button', path: '/components/button', leaf: true,submenu: false },
+          { title: 'Checkbox', path: '/components/checkbox', leaf: true,submenu: false },
+          { title: 'Date & Time', path: '/components/datetime', leaf: true ,submenu: false},
+          { title: 'Radio', path: '/components/radio', leaf: true,submenu: false },
+          { title: 'Slider', path: '/components/slider', leaf: true,submenu: false },
+          { title: 'Switch', path: '/components/switch', leaf: true,submenu: false },
+          { title: 'Text Field', path: '/components/text', leaf: true,submenu: false },
 
         ]
       }
@@ -106,12 +133,12 @@ const sideNavItems = [
     mainmenu: true,
     leaf:false,
     submenuItems: [
-          { icon: <TbClipboardTypography />, title: 'Typography', path: '/typography'},
-          { icon: <TbColorPicker />, title: 'Color', path: '/color' },
-          { icon: <TbShadow />, title: 'Shadow', path: '/shadow' },
-          { icon: <TbMap2 />, title: 'Map', path: '/map' },
-          { icon: <CiDatabase />, title: 'Data Grid', path: '/datagrid'},
-          { icon: <IoTabletLandscape />, title: 'Table', path: '/table' },
+          { icon: <TbClipboardTypography />, title: 'Typography', path: '/typography',submenu: false},
+          { icon: <TbColorPicker />, title: 'Color', path: '/color' ,submenu: false},
+          { icon: <TbShadow />, title: 'Shadow', path: '/shadow' ,submenu: false},
+          { icon: <TbMap2 />, title: 'Map', path: '/map',submenu: false },
+          { icon: <CiDatabase />, title: 'Data Grid', path: '/datagrid',submenu: false},
+          { icon: <IoTabletLandscape />, title: 'Table', path: '/table',submenu: false },
     ],
   },
 ]
